@@ -1,0 +1,805 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>StepInStyle — Products</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#000;
+    --card:#1e1e1e;
+    --gold:#D4AF37;
+    --yellow:#F4B400;
+    --text:#fff;
+    --muted:#bdbdbd;
+    --glass: rgba(255,255,255,0.03);
+    --success: #00b894;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:'Poppins',sans-serif;
+    background:linear-gradient(180deg,#000,#0a0a0a 60%);
+    color:var(--text);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+  }
+  
+
+   /* ===== NAVBAR ===== */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 8%;
+      background: rgba(0, 0, 0, 0.9);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 8px rgba(212, 175, 55, 0.2);
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      
+    }
+
+    .brand-name {
+      color: var(--accent);
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 0%;
+      height: 2px;
+      background: var(--accent);
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .menu-toggle {
+      display: none;
+      color: var(--accent);
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    @media (max-width: 850px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background: var(--secondary);
+        width: 100%;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        padding: 20px 0;
+      }
+      .nav-links.show {
+        display: flex;
+        animation: fadeIn 0.5s ease;
+      }
+      .menu-toggle {
+        display: block;
+      }
+    }
+
+
+  
+
+
+  /* Layout */
+  .wrap{max-width:1200px;margin:32px auto;padding:0 16px;}
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:22px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .logo{width:46px;height:46px;border-radius:8px;border:2px solid var(--gold);display:inline-block;background:linear-gradient(135deg,var(--gold),var(--yellow))}
+  .brand h1{margin:0;font-size:1.15rem;color:var(--gold)}
+  .controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  .search{padding:8px 12px;border-radius:999px;background:var(--glass);border:1px solid rgba(255,255,255,0.04);color:var(--text);min-width:200px}
+  .btn{background:var(--yellow);
+    color:#000;
+    padding:8px 14px;
+    border-radius:20px;
+    border:none;
+    font-weight:600;
+    cursor:pointer;
+    transition:transform .18s
+}
+  .btn:hover{transform:scale(1.03)}
+  .grid-layout{display:grid;grid-template-columns: 260px 1fr; gap:20px;align-items:start}
+  /* Sidebar filters */
+  .sidebar{background:var(--card);padding:18px;border-radius:14px;border:1px solid rgba(255,255,255,0.03)}
+  .filter-group{margin-bottom:18px}
+  .filter-group h4{margin:0 0 10px;color:var(--gold)}
+  .chips{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{padding:8px 10px;border-radius:999px;background:rgba(255,255,255,0.02);cursor:pointer;border:1px solid rgba(255,255,255,0.02)}
+  .chip.active{background:linear-gradient(90deg,var(--gold),var(--yellow));color:#000;border-color:transparent}
+  input[type=range]{width:100%}
+  select,input,textarea{background:#0b0b0b;color:var(--text);border:1px solid rgba(255,255,255,0.04);padding:8px;border-radius:8px;width:100%}
+  label{display:block;font-size:.86rem;color:var(--muted);margin-bottom:6px}
+
+  /* Products */
+  .products-wrap{display:flex;flex-direction:column;gap:18px}
+  .sort-row{display:flex;justify-content:space-between;align-items:center;gap:12px}
+  .product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:12px}
+  .card{background:linear-gradient(180deg,var(--card),#161616);border-radius:14px;padding:12px;border:1px solid rgba(255,255,255,0.03);transition:transform .25s,box-shadow .25s;overflow:hidden}
+  .card:hover{transform:translateY(-8px);box-shadow:0 10px 30px rgba(212,175,55,0.08)}
+  .img-wrap{height:230px;border-radius:10px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#0a0a0a,#111)}
+  .img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+  .card:hover .img-wrap img{transform:scale(1.1)}
+  .prod-meta{padding:10px}
+  .title{font-weight:600}
+  .price-row{display:flex;align-items:center;gap:10px;margin-top:8px}
+  .price{font-weight:700;color:var(--text)}
+  .old{color:var(--muted);text-decoration:line-through;font-size:.9rem}
+  .badge{background:rgba(212,175,55,0.12);color:var(--gold);padding:4px 8px;border-radius:8px;font-weight:600;font-size:.85rem}
+
+  .card-actions{display:flex;gap:8px;margin-top:10px;align-items:center}
+  .small{padding:8px 12px;border-radius:999px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);cursor:pointer}
+
+  /* Cart sidebar */
+  .cart-btn{
+    position:fixed;
+    right:18px;
+    bottom:18px;
+    background:linear-gradient(90deg,var(--gold),var(--yellow));
+    color:#000;
+    
+    padding:12px 18px;
+    border-radius:30px;
+    border:none;
+    z-index:1200;
+    box-shadow:0 12px 30px rgba(212,175,55,0.18);cursor:pointer
+}
+  .cart-panel{position:fixed;right:18px;top:18px;width:360px;max-width:92%;height:calc(100vh - 36px);background:#070707;border-radius:14px;padding:14px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 20px 60px rgba(0,0,0,0.6);transform:translateX(110%);transition:transform .32s ease;z-index:1100;display:flex;flex-direction:column}
+  .cart-panel.open{transform:translateX(0)}
+  .cart-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  .cart-list{flex:1;overflow:auto;padding-right:6px}
+  .cart-item{display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px dashed rgba(255,255,255,0.03)}
+  .cart-item img{width:64px;height:64px;object-fit:cover;border-radius:8px}
+  .qty{display:flex;align-items:center;gap:8px}
+  .qty button{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text);padding:6px;border-radius:6px;cursor:pointer}
+  .cart-summary{padding-top:10px;border-top:1px solid rgba(255,255,255,0.03);margin-top:10px}
+  .summary-row{display:flex;justify-content:space-between;color:var(--muted);margin:8px 0}
+  .checkout-btn{width:100%;padding:12px;border-radius:10px;border:none;background:linear-gradient(90deg,var(--gold),var(--yellow));font-weight:700;color:#000;cursor:pointer}
+
+
+.small {
+    color: black;
+    background-color: gold;
+}
+.small:hover {
+     background-color: gold;
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+}
+
+  /* Product Modal */
+  .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;z-index:1200;opacity:0;pointer-events:none;transition:opacity .2s}
+  .modal-backdrop.open{opacity:1;pointer-events:auto}
+  .modal{max-width:900px;width:95%;background:#0b0b0b;border-radius:12px;padding:16px;border:1px solid rgba(255,255,255,0.03);display:flex;gap:16px}
+  .modal-left{flex:1;display:flex;align-items:center;justify-content:center}
+  .modal-left img{width:100%;max-width:420px;object-fit:contain}
+  .modal-right{flex:1;padding:8px}
+  .sizes{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+  .size{padding:8px 12px;border-radius:8px;background:rgba(255,255,255,0.02);cursor:pointer;border:1px solid rgba(255,255,255,0.03)}
+  .size.selected{background:linear-gradient(90deg,var(--gold),var(--yellow));color:#000}
+  .colors{display:flex;gap:8px;margin-bottom:12px}
+  .color-dot{width:28px;height:28px;border-radius:50%;border:2px solid rgba(255,255,255,0.06);cursor:pointer}
+  .color-dot.selected{box-shadow:0 0 12px rgba(212,175,55,0.7);transform:scale(1.08)}
+
+  /* Checkout modal */
+  .checkout-form{display:flex;flex-direction:column;gap:10px}
+  .field-row{display:flex;gap:8px}
+  .field-row .col{flex:1}
+  .upi-box{display:flex;gap:12px;align-items:center;padding:12px;background:#111;border-radius:8px;border:1px dashed rgba(255,255,255,0.04)}
+  .upi-qr{width:96px;height:96px;background:linear-gradient(135deg,#111,#0b0b0b);display:flex;align-items:center;justify-content:center;border-radius:6px;color:var(--muted);font-size:.8rem}
+  .place-btn{background:var(--gold);color:#000;padding:12px;border-radius:10px;border:none;font-weight:700;cursor:pointer}
+
+  /* Empty */
+  .empty{padding:24px;text-align:center;color:var(--muted)}
+
+  /* Responsive */
+  @media (max-width:980px){
+    .grid-layout{grid-template-columns:1fr;gap:18px}
+    .product-grid{grid-template-columns:repeat(2,1fr)}
+    .img-wrap{height:180px}
+    .hero-small{display:block}
+  }
+  @media (max-width:640px){
+    .product-grid{grid-template-columns:1fr}
+    .topbar{flex-direction:column;align-items:flex-start;gap:8px}
+    .controls{width:100%;justify-content:space-between}
+    .search{min-width:140px}
+    .modal{flex-direction:column}
+    .modal-left img{max-width:320px}
+  }
+</style>
+</head>
+<body>
+
+   <!-- NAVBAR -->
+  <header>
+    <div class="logo-area">
+      <img src="https://images.assetsdelivery.com/compings_v2/elenka1/elenka11805/elenka1180500323.jpg" alt="Logo" class="logo" />
+      <h1 class="brand-name">StepZone</h1>
+    </div>
+
+    <nav class="nav-links" id="navMenu">
+      <a href="./index.html">Home</a>
+      <a href="#">Shop</a>
+      <a href="./about.html">About</a>
+      <a href="./contact.html">Contact</a>
+      <!--<a href="#">🛒 Cart</a>-->
+    </nav>
+
+    <div class="menu-toggle" id="menuToggle">☰</div>
+  </header>
+
+
+<div class="wrap">
+  <div class="topbar">
+    <div class="brand"><span class="logo"></span><h1>StepInStyle</h1></div>
+    <div class="controls">
+      <input class="search" id="searchInput" placeholder="Search products...">
+      <select id="sortSelect">
+        <option value="new">Sort: New Arrivals</option>
+        <option value="low">Price: Low → High</option>
+        <option value="high">Price: High → Low</option>
+      </select>
+      <button class="btn" id="clearFilters">Clear</button>
+    </div>
+  </div>
+
+  <div class="grid-layout">
+    <!-- Sidebar filters -->
+    <aside class="sidebar">
+      <div class="filter-group">
+        <h4>Category</h4>
+        <div class="chips" id="catChips">
+          <div class="chip active" data-cat="all">All</div>
+          <div class="chip" data-cat="Men">Men</div>
+          <div class="chip" data-cat="Women">Women</div>
+          <div class="chip" data-cat="Kids">Kids</div>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <h4>Price (max)</h4>
+        <input type="range" id="priceRange" min="500" max="8000" step="100" value="8000">
+        <div style="display:flex;justify-content:space-between;margin-top:8px">
+          <small class="muted">₹500</small><small id="priceVal">₹8000</small>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <h4>Size</h4>
+        <div class="chips" id="sizeChips">
+          <div class="chip" data-size="7">7</div>
+          <div class="chip" data-size="8">8</div>
+          <div class="chip" data-size="9">9</div>
+          <div class="chip" data-size="10">10</div>
+          <div class="chip" data-size="11">11</div>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <h4>Color</h4>
+        <div class="chips" id="colorChips">
+          <div class="chip" data-color="Black">Black</div>
+          <div class="chip" data-color="White">White</div>
+          <div class="chip" data-color="Brown">Brown</div>
+          <div class="chip" data-color="Blue">Blue</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Product area -->
+    <main class="products-wrap">
+      <div class="sort-row">
+        <div><strong id="resultsCount">0</strong> Products</div>
+        <div style="color:var(--muted)">Showing results — hover images to zoom. Click a product for details.</div>
+      </div>
+
+      <div class="product-grid" id="productGrid">
+        <!-- JS injected -->
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- Cart Button & Panel -->
+<button class="cart-btn" id="openCart">🛒 Cart (<span id="cartCount">0</span>)</button>
+
+<div class="cart-panel" id="cartPanel" aria-hidden="true">
+  <div class="cart-head">
+    <strong>Your Cart</strong>
+    <button class="small" id="closeCart">Close</button>
+  </div>
+
+  <div class="cart-list" id="cartList">
+    <!-- items -->
+  </div>
+
+  <div class="cart-summary">
+    <div class="summary-row"><span>Subtotal</span><span id="subtotal">₹0</span></div>
+    <div class="summary-row"><span>Tax (5%)</span><span id="taxAmt">₹0</span></div>
+    <div class="summary-row"><span>Discount</span><span id="discAmt">₹0</span></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px"><strong>Total</strong><strong id="totalAmt">₹0</strong></div>
+    <div style="margin-top:12px">
+      <button class="checkout-btn" id="proceedCheckout">Proceed to Checkout</button>
+    </div>
+  </div>
+</div>
+
+<!-- Product Modal -->
+<div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="modal-left">
+      <img id="modalImg" src="" alt="product">
+    </div>
+    <div class="modal-right">
+      <h3 id="modalTitle"></h3>
+      <div class="badge" id="modalBadge"></div>
+      <div style="margin-top:8px" class="price-row"><div class="price" id="modalPrice"></div><div class="old" id="modalOld"></div></div>
+      <p id="modalDesc" style="color:var(--muted);margin-top:10px"></p>
+
+      <label style="margin-top:12px">Choose Size</label>
+      <div class="sizes" id="modalSizes"></div>
+
+      <label>Color</label>
+      <div class="colors" id="modalColors"></div>
+
+      <div style="display:flex;gap:8px;margin-top:12px">
+        <input id="modalQty" type="number" min="1" value="1" style="width:90px;padding:8px;border-radius:8px;background:#0b0b0b;border:1px solid rgba(255,255,255,0.04);color:var(--text)">
+        <button class="btn" id="addToCartBtn">Add to Cart</button>
+      </div>
+
+      <div style="margin-top:12px;display:flex;gap:8px">
+        <button class="small" id="closeModal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Checkout Modal -->
+<div class="modal-backdrop" id="checkoutBackdrop" aria-hidden="true">
+  <div class="modal" style="max-width:720px">
+    <div style="flex:1;padding:6px">
+      <h3>Checkout</h3>
+      <div class="checkout-form" id="checkoutForm">
+        <label>Name<input id="custName" required></label>
+        <label>Mobile<input id="custMobile" required></label>
+        <label>Delivery Address<textarea id="custAddress" rows="3" required></textarea></label>
+        <div class="field-row">
+          <div class="col">
+            <label>Pincode<input id="custPincode" required></label>
+          </div>
+          <div class="col">
+            <label>Payment
+              <select id="payMethod">
+                <option value="COD">Cash on Delivery (COD)</option>
+                <option value="UPI">UPI (Scan/Pay)</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div id="upiSection" style="display:none;margin-top:8px">
+          <div class="upi-box">
+            <div class="upi-qr">UPI QR</div>
+            <div style="flex:1">
+              <div style="color:var(--muted)">Scan to pay</div>
+              <div style="margin-top:6px;font-weight:700">upi@bank (UPI ID)</div>
+              <div style="margin-top:6px;color:var(--muted);font-size:.9rem">Or copy UPI ID above and pay</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:12px;display:flex;gap:8px;align-items:center;">
+          <button class="place-btn" id="placeOrderBtn">Place Order & Send to WhatsApp</button>
+          <button class="small" id="cancelCheckout">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <div style="width:260px;padding:12px;border-left:1px solid rgba(255,255,255,0.03)">
+      <h4>Order Summary</h4>
+      <div id="summaryMini" style="max-height:380px;overflow:auto"></div>
+      <div style="margin-top:12px;color:var(--muted)">
+        <div style="display:flex;justify-content:space-between"><small>Subtotal</small><small id="sum_sub">₹0</small></div>
+        <div style="display:flex;justify-content:space-between"><small>Tax</small><small id="sum_tax">₹0</small></div>
+        <div style="display:flex;justify-content:space-between"><small>Total</small><small id="sum_total">₹0</small></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+    /// Mobile Menu Toggle
+const menuToggle = document.getElementById("menuToggle");
+const navMenu = document.getElementById("navMenu");
+
+menuToggle.addEventListener("click", () => {
+  navMenu.classList.toggle("show");
+});
+
+// Navbar color change on scroll
+window.addEventListener("scroll", () => {
+  const navbar = document.querySelector(".navbar");
+  if (window.scrollY > 50) {
+    navbar.classList.add("scrolled");
+  } else {
+    navbar.classList.remove("scrolled");
+  }
+});
+/* ---------------------------
+   Sample products data
+   ---------------------------*/
+const PRODUCTS = [
+  {id:1,title:"AeroSport Runner",category:"Men",price:3499,old:4999,discount:30,colors:["Black","Blue"],sizes:[8,9,10,11],img:"https://i2.zebrastores.cz/merrellstore/files/24/24cb6a7f-ba90-4b3f-ab26-d777e0b7a1a1_1000_833.jpg",desc:"Lightweight running shoes with breathable mesh."},
+  {id:2,title:"Urban Classic Loafer",category:"Men",price:2899,old:3899,discount:25,colors:["Brown","Black"],sizes:[8,9,10,11],img:"https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=900&q=80",desc:"Timeless loafers for formal & semi-formal wear."},
+  {id:3,title:"Velvet Heels",category:"Women",price:3999,old:5499,discount:27,colors:["Black","White"],sizes:[7,8,9,10],img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRweY9vBUGNgvn_fKUQHENke-S-MKubQ0agpQ&s",desc:"Elegant heels with cushioned insole."},
+  {id:4,title:"ComfySlip Casuals",category:"Women",price:2199,old:2699,discount:18,colors:["White","Blue"],sizes:[6,7,8,9],img:"https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=900&q=80",desc:"Comfortable everyday casuals."},
+  {id:5,title:"PlayKids Sneakers",category:"Kids",price:1299,old:1799,discount:28,colors:["Blue","White"],sizes:[5,6,7],img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQib4pJwz7IhAHBG5BLEeYkZ0755vEVqVcEwQ&s",desc:"Soft sole sneakers for little ones."},
+  {id:6,title:"Trail X Trekker",category:"Men",price:4599,old:5999,discount:23,colors:["Brown","Black"],sizes:[9,10,11],img:"https://assets.myntassets.com/w_412,q_30,dpr_3,fl_progressive,f_webp/assets/images/24096030/2023/9/5/9c55b0cf-dfaa-492b-9550-d29c62f0be251693892712692-Explore-Nitro-Mens-Hiking-Running-Shoes-4991693892712368-1.jpg",desc:"Durable trekking shoes built for rough terrain."},
+  // add more products as needed
+];
+
+/* ---------------------------
+   State
+   ---------------------------*/
+let state = {
+  products: PRODUCTS.slice(),
+  filters:{category:'all',maxPrice:8000,size:null,color:null,search:'',sort:'new'},
+  cart: JSON.parse(localStorage.getItem('cart_stepin')||'[]')
+};
+
+/* ---------------------------
+   Utils & render
+   ---------------------------*/
+const productGrid = document.getElementById('productGrid');
+const resultsCount = document.getElementById('resultsCount');
+const priceRange = document.getElementById('priceRange');
+const priceVal = document.getElementById('priceVal');
+
+function format(n){return "₹"+Number(n).toLocaleString('en-IN')}
+
+function renderProducts(){
+  // apply filters
+  let list = PRODUCTS.filter(p=>{
+    if(state.filters.category!=='all' && p.category!==state.filters.category) return false;
+    if(p.price>state.filters.maxPrice) return false;
+    if(state.filters.size && !p.sizes.includes(Number(state.filters.size))) return false;
+    if(state.filters.color && !p.colors.includes(state.filters.color)) return false;
+    if(state.filters.search && !p.title.toLowerCase().includes(state.filters.search.toLowerCase())) return false;
+    return true;
+  });
+
+  if(state.filters.sort==='low') list.sort((a,b)=>a.price-b.price);
+  else if(state.filters.sort==='high') list.sort((a,b)=>b.price-a.price);
+  else list = list.sort((a,b)=>b.id-a.id); // new arrivals by id desc
+
+  resultsCount.textContent = list.length;
+  productGrid.innerHTML = '';
+  list.forEach(p=>{
+    const card = document.createElement('div'); card.className='card';
+    card.innerHTML = `
+      <div class="img-wrap"><img src="${p.img}" alt="${p.title}"></div>
+      <div class="prod-meta">
+        <div class="title">${p.title}</div>
+        <div class="price-row">
+          <div class="price">${format(p.price)}</div>
+          <div class="old">${format(p.old)}</div>
+          <div style="margin-left:auto"><span class="badge">${p.discount}% OFF</span></div>
+        </div>
+        <div class="card-actions">
+          <button class="small view-btn" data-id="${p.id}">View</button>
+          <button class="small" data-id="${p.id}" data-action="add">Add to Cart</button>
+        </div>
+      </div>
+    `;
+    productGrid.appendChild(card);
+  });
+  attachProductEvents();
+}
+
+/* ---------------------------
+   Filters & UI hooks
+   ---------------------------*/
+document.getElementById('catChips').addEventListener('click', e=>{
+  const chip = e.target.closest('.chip'); if(!chip) return;
+  document.querySelectorAll('#catChips .chip').forEach(c=>c.classList.remove('active'));
+  chip.classList.add('active');
+  state.filters.category = chip.dataset.cat;
+  renderProducts();
+});
+
+priceRange.addEventListener('input', e=>{
+  const v = Number(e.target.value);
+  state.filters.maxPrice = v;
+  priceVal.textContent = format(v);
+  renderProducts();
+});
+
+document.getElementById('sizeChips').addEventListener('click', e=>{
+  const chip = e.target.closest('.chip'); if(!chip) return;
+  if(chip.classList.contains('active')){ chip.classList.remove('active'); state.filters.size=null; }
+  else{ document.querySelectorAll('#sizeChips .chip').forEach(c=>c.classList.remove('active')); chip.classList.add('active'); state.filters.size = chip.dataset.size; }
+  renderProducts();
+});
+
+document.getElementById('colorChips').addEventListener('click', e=>{
+  const chip = e.target.closest('.chip'); if(!chip) return;
+  if(chip.classList.contains('active')){ chip.classList.remove('active'); state.filters.color=null; }
+  else{ document.querySelectorAll('#colorChips .chip').forEach(c=>c.classList.remove('active')); chip.classList.add('active'); state.filters.color = chip.dataset.color; }
+  renderProducts();
+});
+
+document.getElementById('sortSelect').addEventListener('change', e=>{
+  state.filters.sort = e.target.value; renderProducts();
+});
+
+document.getElementById('searchInput').addEventListener('input', e=>{
+  state.filters.search = e.target.value; renderProducts();
+});
+
+document.getElementById('clearFilters').addEventListener('click', ()=>{
+  state.filters = {category:'all',maxPrice:8000,size:null,color:null,search:'',sort:'new'};
+  // UI reset
+  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+  document.querySelector('#catChips .chip[data-cat="all"]').classList.add('active');
+  priceRange.value = 8000; priceVal.textContent = format(8000);
+  document.querySelectorAll('#sizeChips .chip,#colorChips .chip').forEach(c=>c.classList.remove('active'));
+  document.getElementById('sortSelect').value='new';
+  document.getElementById('searchInput').value='';
+  renderProducts();
+});
+
+/* ---------------------------
+   Product events: view/add
+   ---------------------------*/
+function attachProductEvents(){
+  document.querySelectorAll('.view-btn').forEach(btn=>{
+    btn.onclick = ()=>openModal(Number(btn.dataset.id));
+  });
+  document.querySelectorAll('.card .small[data-action="add"]').forEach(btn=>{
+    btn.onclick = ()=>addToCart(Number(btn.dataset.id),1);
+  });
+}
+
+/* ---------------------------
+   Modal logic
+   ---------------------------*/
+const modalBackdrop = document.getElementById('modalBackdrop');
+const modalImg = document.getElementById('modalImg');
+const modalTitle = document.getElementById('modalTitle');
+const modalDesc = document.getElementById('modalDesc');
+const modalBadge = document.getElementById('modalBadge');
+const modalPrice = document.getElementById('modalPrice');
+const modalOld = document.getElementById('modalOld');
+const modalSizes = document.getElementById('modalSizes');
+const modalColors = document.getElementById('modalColors');
+const modalQty = document.getElementById('modalQty');
+let currentModalProduct = null;
+
+function openModal(id){
+  const p = PRODUCTS.find(x=>x.id===id); if(!p) return;
+  currentModalProduct = p;
+  modalImg.src = p.img; modalTitle.textContent = p.title; modalDesc.textContent = p.desc;
+  modalBadge.textContent = p.discount + '% OFF';
+  modalPrice.textContent = format(p.price); modalOld.textContent = format(p.old);
+
+  modalSizes.innerHTML = ''; p.sizes.forEach(sz=>{
+    const b = document.createElement('div'); b.className='size'; b.textContent=sz; b.dataset.size=sz;
+    b.onclick = ()=>{ document.querySelectorAll('#modalSizes .size').forEach(s=>s.classList.remove('selected')); b.classList.add('selected'); };
+    modalSizes.appendChild(b);
+  });
+
+  modalColors.innerHTML = ''; p.colors.forEach(c=>{
+    const d = document.createElement('div'); d.className='color-dot'; d.style.background = (c.toLowerCase()==='white'?'#fff':(c.toLowerCase()==='black'?'#111':c.toLowerCase()));
+    d.title = c; d.dataset.color=c;
+    d.onclick = ()=>{ document.querySelectorAll('#modalColors .color-dot').forEach(x=>x.classList.remove('selected')); d.classList.add('selected'); };
+    modalColors.appendChild(d);
+  });
+
+  modalQty.value = 1;
+  modalBackdrop.classList.add('open'); modalBackdrop.setAttribute('aria-hidden','false');
+}
+document.getElementById('closeModal').addEventListener('click', closeModal);
+modalBackdrop.addEventListener('click', e=>{ if(e.target===modalBackdrop) closeModal(); });
+function closeModal(){ modalBackdrop.classList.remove('open'); modalBackdrop.setAttribute('aria-hidden','true'); currentModalProduct=null; }
+
+/* ---------------------------
+   Cart logic
+   ---------------------------*/
+const cartPanel = document.getElementById('cartPanel');
+const openCartBtn = document.getElementById('openCart');
+const closeCartBtn = document.getElementById('closeCart');
+const cartList = document.getElementById('cartList');
+const cartCount = document.getElementById('cartCount');
+
+openCartBtn.addEventListener('click', ()=>{ renderCart(); cartPanel.classList.add('open'); });
+closeCartBtn.addEventListener('click', ()=>cartPanel.classList.remove('open'));
+
+function saveCart(){ localStorage.setItem('cart_stepin', JSON.stringify(state.cart)); renderCartCount(); }
+
+function addToCart(id, qty, chosenSize=null, chosenColor=null){
+  const p = PRODUCTS.find(x=>x.id===id);
+  if(!p) return;
+  // If modal used, take selected size/color
+  if(currentModalProduct && currentModalProduct.id===id){
+    const selSize = document.querySelector('#modalSizes .size.selected');
+    const selColor = document.querySelector('#modalColors .color-dot.selected');
+    if(selSize) chosenSize = selSize.dataset.size;
+    if(selColor) chosenColor = selColor.dataset.color;
+  }
+  // default size/color
+  chosenSize = chosenSize || p.sizes[0];
+  chosenColor = chosenColor || p.colors[0];
+
+  // find if exists
+  const existing = state.cart.find(it=>it.id===id && it.size==chosenSize && it.color==chosenColor);
+  if(existing){ existing.qty += qty; }
+  else state.cart.push({id:p.id,title:p.title,price:p.price,img:p.img,qty:qty,size:chosenSize,color:chosenColor});
+  saveCart();
+  alert('Added to cart');
+  closeModal();
+}
+
+function renderCartCount(){ cartCount.textContent = state.cart.reduce((s,i)=>s+i.qty,0); }
+
+function renderCart(){
+  cartList.innerHTML = '';
+  if(state.cart.length===0){ cartList.innerHTML = '<div class="empty">Your cart is empty.</div>'; updateSummary(); return; }
+  state.cart.forEach((it,idx)=>{
+    const div = document.createElement('div'); div.className='cart-item';
+    div.innerHTML = `<img src="${it.img}"><div style="flex:1"><div style="font-weight:600">${it.title}</div><div style="font-size:.9rem;color:var(--muted)">${it.size} • ${it.color}</div></div>
+      <div style="text-align:right">
+        <div class="qty">
+          <button data-idx="${idx}" class="qty-minus">−</button>
+          <div style="padding:6px 10px">${it.qty}</div>
+          <button data-idx="${idx}" class="qty-plus">+</button>
+        </div>
+        <div style="margin-top:8px;font-weight:700">${format(it.price*it.qty)}</div>
+        <div style="margin-top:8px"><button class="small remove-item" data-idx="${idx}">Remove</button></div>
+      </div>`;
+    cartList.appendChild(div);
+  });
+  // attach events
+  cartList.querySelectorAll('.qty-plus').forEach(b=>b.onclick = (e)=>{ const i=Number(e.target.dataset.idx); state.cart[i].qty++; saveCart(); renderCart(); });
+  cartList.querySelectorAll('.qty-minus').forEach(b=>b.onclick = (e)=>{ const i=Number(e.target.dataset.idx); if(state.cart[i].qty>1) state.cart[i].qty--; else state.cart.splice(i,1); saveCart(); renderCart(); });
+  cartList.querySelectorAll('.remove-item').forEach(b=>b.onclick=(e)=>{ const i=Number(e.target.dataset.idx); state.cart.splice(i,1); saveCart(); renderCart();});
+  updateSummary();
+}
+
+function updateSummary(){
+  const subtotal = state.cart.reduce((s,i)=>s + i.price*i.qty,0);
+  const tax = Math.round(subtotal * 0.05);
+  const discount = 0;
+  const total = subtotal + tax - discount;
+  document.getElementById('subtotal').textContent = format(subtotal);
+  document.getElementById('taxAmt').textContent = format(tax);
+  document.getElementById('discAmt').textContent = format(discount);
+  document.getElementById('totalAmt').textContent = format(total);
+
+  document.getElementById('sum_sub').textContent = format(subtotal);
+  document.getElementById('sum_tax').textContent = format(tax);
+  document.getElementById('sum_total').textContent = format(total);
+}
+
+/* ---------------------------
+   Proceed to checkout
+   ---------------------------*/
+document.getElementById('proceedCheckout').addEventListener('click', ()=> {
+  if(state.cart.length===0){ alert('Cart is empty'); return; }
+  // show checkout modal
+  openCheckout();
+});
+
+function openCheckout(){
+  renderCart(); // refresh numbers
+  // populate summaryMini
+  const el = document.getElementById('summaryMini'); el.innerHTML = '';
+  state.cart.forEach(it=>{
+    const row = document.createElement('div'); row.style.display='flex';row.style.justifyContent='space-between';row.style.marginBottom='8px';
+    row.innerHTML = `<div><small>${it.title} × ${it.qty}</small><div style="color:var(--muted);font-size:.85rem">${it.size} • ${it.color}</div></div><div style="font-weight:700">${format(it.price*it.qty)}</div>`;
+    el.appendChild(row);
+  });
+  document.getElementById('checkoutBackdrop').classList.add('open'); document.getElementById('checkoutBackdrop').setAttribute('aria-hidden','false');
+}
+
+document.getElementById('cancelCheckout').addEventListener('click', ()=>{ document.getElementById('checkoutBackdrop').classList.remove('open'); });
+
+/* ---------------------------
+   UPI toggle
+   ---------------------------*/
+document.getElementById('payMethod').addEventListener('change', (e)=>{
+  document.getElementById('upiSection').style.display = (e.target.value==='UPI' ? 'block' : 'none');
+});
+
+/* ---------------------------
+   Place order -> WhatsApp
+   ---------------------------*/
+document.getElementById('placeOrderBtn').addEventListener('click', ()=>{
+  const name = document.getElementById('custName').value.trim();
+  const mobile = document.getElementById('custMobile').value.trim();
+  const addr = document.getElementById('custAddress').value.trim();
+  const pin = document.getElementById('custPincode').value.trim();
+  const pay = document.getElementById('payMethod').value;
+  if(!name||!mobile||!addr||!pin){ alert('Please fill all fields'); return; }
+  if(state.cart.length===0){ alert('Cart empty'); return; }
+
+  const subtotal = state.cart.reduce((s,i)=>s + i.price*i.qty,0);
+  const tax = Math.round(subtotal*0.05);
+  const total = subtotal + tax;
+
+  // build message
+  let msg = `*New Order — StepInStyle*%0A`;
+  msg += `Name: ${encodeURIComponent(name)}%0A`;
+  msg += `Mobile: ${encodeURIComponent(mobile)}%0A`;
+  msg += `Address: ${encodeURIComponent(addr)} | Pincode: ${encodeURIComponent(pin)}%0A`;
+  msg += `Payment: ${encodeURIComponent(pay)}%0A%0A`;
+  msg += `*Items*:%0A`;
+  state.cart.forEach(it => {
+    msg += `${encodeURIComponent(it.title)} (Size:${it.size}, Color:${it.color}) × ${it.qty} — ${encodeURIComponent('₹'+(it.price*it.qty))}%0A`;
+  });
+  msg += `%0ASubtotal: ${encodeURIComponent('₹'+subtotal)}%0ATax: ${encodeURIComponent('₹'+tax)}%0ATotal: ${encodeURIComponent('₹'+total)}%0A`;
+
+  // Owner WhatsApp number (replace with actual if needed)
+  const ownerNumber = '918073754161012';
+  const waLink = `https://wa.me/${ownerNumber}?text=${msg}`;
+
+  // open WhatsApp
+  window.open(waLink, '_blank');
+
+  // clear cart and close
+  state.cart = []; saveCart(); renderCart();
+  document.getElementById('checkoutBackdrop').classList.remove('open');
+  alert('Order prepared and opening WhatsApp. Please complete the flow on WhatsApp if required.');
+});
+
+/* ---------------------------
+   Init
+   ---------------------------*/
+priceRange.value = 8000; priceVal.textContent = format(8000);
+document.querySelector('#catChips .chip[data-cat="all"]').classList.add('active');
+renderProducts();
+renderCartCount();
+updateSummary();
+</script>
+</body>
+</html>

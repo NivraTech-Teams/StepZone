@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | StepZone</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ========== CONTACT PAGE STYLES ========== */
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #000000;
+      color: white;
+      overflow-x: hidden;
+    }
+    /* ===== NAVBAR ===== */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 8%;
+      background: rgba(0, 0, 0, 0.9);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 8px rgba(212, 175, 55, 0.2);
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+    }
+
+    .brand-name {
+      color: var(--accent);
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 0%;
+      height: 2px;
+      background: var(--accent);
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .menu-toggle {
+      display: none;
+      color: var(--accent);
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    @media (max-width: 850px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background: var(--secondary);
+        width: 100%;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        padding: 20px 0;
+      }
+      .nav-links.show {
+        display: flex;
+        animation: fadeIn 0.5s ease;
+      }
+      .menu-toggle {
+        display: block;
+      }
+    }
+
+    /* Background Animation */
+    .contact-bg {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .contact-bg span {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: rgba(212,175,55,0.2);
+      animation: float 10s infinite ease-in-out alternate;
+      filter: blur(60px);
+    }
+
+    .contact-bg span:nth-child(1) { top: 10%; left: 15%; animation-delay: 0s; }
+    .contact-bg span:nth-child(2) { top: 40%; left: 70%; animation-delay: 2s; }
+    .contact-bg span:nth-child(3) { top: 75%; left: 30%; animation-delay: 4s; }
+
+    @keyframes float {
+      0% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(-40px) scale(1.1); }
+    }
+
+    /* Contact Section */
+    .contact-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    .contact-title {
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: #f4b400;
+      margin-bottom: 10px;
+      text-shadow: 0 0 20px rgba(244,180,0,0.7);
+    }
+
+    .contact-subtitle {
+      font-size: 1rem;
+      color: #ccc;
+      margin-bottom: 50px;
+    }
+
+    /* Glassmorphism Card */
+    .contact-form {
+      background: rgba(30,30,30,0.7);
+      border: 1px solid rgba(244,180,0,0.3);
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(244,180,0,0.2);
+      padding: 40px;
+      max-width: 500px;
+      width: 100%;
+      backdrop-filter: blur(10px);
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(244,180,0,0.3);
+      border-radius: 12px;
+      padding: 12px 15px;
+      margin-bottom: 15px;
+      color: white;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      outline: none;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: #f4b400;
+      box-shadow: 0 0 10px rgba(244,180,0,0.4);
+    }
+
+    .contact-form button {
+      background: #f4b400;
+      border: none;
+      color: #000;
+      padding: 12px 30px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .contact-form button:hover {
+      background: #ffd84d;
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(244,180,0,0.6);
+    }
+
+    /* Success Popup */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.9);
+      background: #111;
+      color: #f4b400;
+      padding: 30px 40px;
+      border-radius: 15px;
+      box-shadow: 0 0 30px rgba(244,180,0,0.5);
+      text-align: center;
+      animation: popupFade 0.3s ease forwards;
+      z-index: 999;
+    }
+
+    @keyframes popupFade {
+      to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .contact-form { width: 90%; padding: 25px; }
+      .contact-title { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header>
+    <div class="logo-area">
+      <img src="https://images.assetsdelivery.com/compings_v2/elenka1/elenka11805/elenka1180500323.jpg" alt="Logo" class="logo" />
+      <h1 class="brand-name">StepZone</h1>
+    </div>
+
+    <nav class="nav-links" id="navMenu">
+      <a href="index.html">Home</a>
+      <a href="product.html">Shop</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <!--<a href="#">🛒 Cart</a>-->
+    </nav>
+
+    <div class="menu-toggle" id="menuToggle">☰</div>
+  </header>
+
+  <!-- Animated Background -->
+  <div class="contact-bg">
+    <span></span><span></span><span></span>
+  </div>
+
+  <!-- Contact Content -->
+  <div class="contact-container">
+    <h1 class="contact-title">Let's Connect</h1>
+    <p class="contact-subtitle">Got a question, feedback, or custom request? We’re just one message away!</p>
+
+    <form class="contact-form" id="contactForm">
+      <input type="text" id="name" placeholder="Your Name" required>
+      <input type="email" id="email" placeholder="Your Email" required>
+      <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+
+  <!-- Popup -->
+  <div class="popup" id="popup">✅ Message Sent Successfully!<br>We'll get back to you shortly.</div>
+
+  <script>
+
+    /// Mobile Menu Toggle
+const menuToggle = document.getElementById("menuToggle");
+const navMenu = document.getElementById("navMenu");
+
+menuToggle.addEventListener("click", () => {
+  navMenu.classList.toggle("show");
+});
+
+// Navbar color change on scroll
+window.addEventListener("scroll", () => {
+  const navbar = document.querySelector(".navbar");
+  if (window.scrollY > 50) {
+    navbar.classList.add("scrolled");
+  } else {
+    navbar.classList.remove("scrolled");
+  }
+});
+
+
+    // WhatsApp Integration + Popup
+    document.getElementById("contactForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const message = document.getElementById("message").value;
+
+      const phone = "919739530707"; // Owner WhatsApp number
+      const text = `📩 *New Contact Message - StepZone* %0A👤 Name: ${name}%0A📧 Email: ${email}%0A💬 Message: ${message}`;
+      window.open(`https://wa.me/${phone}?text=${text}`, "_blank");
+
+      // Show popup
+      const popup = document.getElementById("popup");
+      popup.style.display = "block";
+      setTimeout(() => popup.style.display = "none", 4000);
+
+      document.getElementById("contactForm").reset();
+    });
+  </script>
+</body>
+</html>

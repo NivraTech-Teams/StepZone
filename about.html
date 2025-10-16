@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us | StepZone</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== COLOR THEME ===== */
+    :root {
+      --background: #000000;
+      --accent: #d4af37;
+      --text: #ffffff;
+      --secondary: #1e1e1e;
+      --button: #f4b400;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--background);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ===== NAVBAR ===== */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 8%;
+      background: rgba(0, 0, 0, 0.9);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 8px rgba(212, 175, 55, 0.2);
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      border:2px solid gold;
+    }
+
+    .brand-name {
+      color: var(--accent);
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 0%;
+      height: 2px;
+      background: var(--accent);
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .menu-toggle {
+      display: none;
+      color: var(--accent);
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    @media (max-width: 850px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background: var(--secondary);
+        width: 100%;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        padding: 20px 0;
+      }
+      .nav-links.show {
+        display: flex;
+        animation: fadeIn 0.5s ease;
+      }
+      .menu-toggle {
+        display: block;
+      }
+    }
+
+    /* ===== HERO SECTION ===== */
+    .hero {
+      position: relative;
+      height: 70vh;
+      background: url('https://images.unsplash.com/photo-1600180758890-6ec6e505e55a') center/cover fixed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--text);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.7), rgba(0,0,0,0.9));
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      animation: floatIn 1.5s ease;
+    }
+
+    .hero-content h1 {
+      font-size: 3rem;
+      color: var(--accent);
+      margin-bottom: 15px;
+      text-shadow: 0 0 20px rgba(212,175,55,0.8);
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: auto;
+      color: #e0e0e0;
+    }
+
+    @keyframes floatIn {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== MISSION & VALUES ===== */
+    .mission-section {
+      background: var(--secondary);
+      padding: 80px 10%;
+      text-align: center;
+    }
+
+    .mission-section h2 {
+      color: var(--accent);
+      font-size: 2.2rem;
+      margin-bottom: 40px;
+    }
+
+    .mission-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+    }
+
+    .card {
+      background: #0d0d0d;
+      border: 1px solid rgba(212,175,55,0.4);
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 0 20px rgba(212,175,55,0.1);
+      transition: 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 25px rgba(212,175,55,0.4);
+    }
+
+    .card h3 {
+      color: var(--button);
+      margin-bottom: 15px;
+    }
+
+    .card p {
+      color: #ccc;
+      line-height: 1.7;
+    }
+
+    /* ===== OUR JOURNEY ===== */
+    .journey {
+      background: linear-gradient(135deg, #1e1e1e, #000);
+      padding: 80px 10%;
+      color: var(--text);
+      text-align: center;
+      position: relative;
+    }
+
+    .journey::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 3px;
+      height: 100%;
+      background: var(--accent);
+      opacity: 0.2;
+    }
+
+    .journey h2 {
+      color: var(--accent);
+      margin-bottom: 50px;
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      position: relative;
+    }
+
+    .timeline-item {
+      background: #111;
+      padding: 20px 30px;
+      border-radius: 12px;
+      border-left: 3px solid var(--accent);
+      text-align: left;
+      transition: 0.3s;
+    }
+
+    .timeline-item:hover {
+      transform: scale(1.02);
+      background: #151515;
+      box-shadow: 0 0 20px rgba(212,175,55,0.3);
+    }
+
+    .timeline-item h4 {
+      color: var(--button);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #0a0a0a;
+      color: #fff;
+      text-align: center;
+      padding: 40px 10%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    footer svg {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      opacity: 0.15;
+      animation: glowPulse 4s infinite alternate;
+    }
+
+    @keyframes glowPulse {
+      from { opacity: 0.1; }
+      to { opacity: 0.3; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+      .mission-section {
+        padding: 50px 8%;
+      }
+      .journey::before {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header>
+    <div class="logo-area">
+      <img src="https://images.assetsdelivery.com/compings_v2/elenka1/elenka11805/elenka1180500323.jpg" alt="Logo" class="logo" />
+      <h1 class="brand-name">StepZone</h1>
+    </div>
+
+    <nav class="nav-links" id="navMenu">
+      <a href="index.html">Home</a>
+      <a href="product.html">Shop</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <!--<a href="#">🛒 Cart</a>-->
+    </nav>
+
+    <div class="menu-toggle" id="menuToggle">☰</div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>About StepZone</h1>
+      <p>Crafting premium footwear that blends luxury, comfort, and durability — StepZone redefines every step you take.</p>
+    </div>
+  </section>
+
+  <!-- MISSION -->
+  <section class="mission-section">
+    <h2>Our Mission & Values</h2>
+    <div class="mission-cards">
+      <div class="card">
+        <h3>Our Mission</h3>
+        <p>Deliver the best in style, comfort, and affordability — empowering confidence one step at a time.</p>
+      </div>
+      <div class="card">
+        <h3>Our Vision</h3>
+        <p>To become a global leader in online footwear shopping — where technology meets timeless design.</p>
+      </div>
+      <div class="card">
+        <h3>Our Promise</h3>
+        <p>Every pair you wear tells a story — we ensure it’s one of comfort, elegance, and quality.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUR JOURNEY -->
+  <section class="journey">
+    <h2>Our Journey</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <h4>2019 - The Beginning</h4>
+        <p>StepZone was founded with a simple goal — to provide quality footwear accessible to everyone.</p>
+      </div>
+      <div class="timeline-item">
+        <h4>2021 - Expansion</h4>
+        <p>We launched our online platform, reaching thousands of happy customers across India.</p>
+      </div>
+      <div class="timeline-item">
+        <h4>2024 - Innovation</h4>
+        <p>Introduced smart recommendations, 3D previews, and premium handcrafted collections.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 StepZone. All Rights Reserved.</p>
+    <svg viewBox="0 0 120 28">
+      <path d="M0,10 C40,40 80,-10 120,10 L120,30 L0,30 Z" fill="gold"></path>
+    </svg>
+  </footer>
+
+  <script>
+    /// Mobile Menu Toggle
+const menuToggle = document.getElementById("menuToggle");
+const navMenu = document.getElementById("navMenu");
+
+menuToggle.addEventListener("click", () => {
+  navMenu.classList.toggle("show");
+});
+
+// Navbar color change on scroll
+window.addEventListener("scroll", () => {
+  const navbar = document.querySelector(".navbar");
+  if (window.scrollY > 50) {
+    navbar.classList.add("scrolled");
+  } else {
+    navbar.classList.remove("scrolled");
+  }
+});
+  </script>
+</body>
+</html>
